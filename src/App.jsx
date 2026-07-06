@@ -1,28 +1,31 @@
-import React from 'react'
+import React, { lazy, Suspense } from 'react'
 import Navbar from './components/Navbar/Navbar'
 import Footer from './components/Footer/Footer'
 import Home from './sections/Home/Home'
-import Syllabus from './sections/Syllabus/Syllabus'
-import RegisterForm from './sections/RegisterForm/RegisterForm'
 import ScrollToTop from './components/ScrollToTop/ScrollToTop'
-import WhyUs from './sections/WhyUs/WhyUs'
-import Process from './sections/Process/Process'
-import FAQ from './sections/FAQ/FAQ'
+
+const Syllabus = lazy(() => import('./sections/Syllabus/Syllabus'))
+const WhyUs = lazy(() => import('./sections/WhyUs/WhyUs'))
+const Process = lazy(() => import('./sections/Process/Process'))
+const FAQ = lazy(() => import('./sections/FAQ/FAQ'))
+const RegisterForm = lazy(() => import('./sections/RegisterForm/RegisterForm'))
 
 export default function App() {
   const scrollToForm = () => {
-    document.getElementById('register').scrollIntoView({ behavior: 'smooth' })
+    document.getElementById('register')?.scrollIntoView({ behavior: 'smooth' })
   }
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 font-sans selection:bg-indigo-500 selection:text-white overflow-x-hidden">
       <Navbar scrollToForm={scrollToForm} />
       <Home scrollToForm={scrollToForm} />
-      <Syllabus />
-      <WhyUs />
-      <Process />
-      <FAQ />
-      <RegisterForm />
+      <Suspense fallback={null}>
+        <Syllabus />
+        <WhyUs />
+        <Process />
+        <FAQ />
+        <RegisterForm />
+      </Suspense>
       <Footer />
       <ScrollToTop />
     </div>
