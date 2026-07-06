@@ -7,7 +7,7 @@ import RegisterForm from './sections/RegisterForm/RegisterForm'
 import ScrollToTop from './components/ScrollToTop/ScrollToTop'
 import WhyUs from './sections/WhyUs/WhyUs'
 import Process from './sections/Process/Process'
-import FAQ from './sections/Faq/Faq'
+import FAQ from './sections/FAQ/FAQ'
 
 export default function App() {
   const scrollToForm = () => {
