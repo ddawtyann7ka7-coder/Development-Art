@@ -3,6 +3,7 @@ import Navbar from './components/Navbar/Navbar'
 import Footer from './components/Footer/Footer'
 import Home from './sections/Home/Home'
 import ScrollToTop from './components/ScrollToTop/ScrollToTop'
+import LoadingSpinner from './components/LoadingSpinner/LoadingSpinner'
 
 const Syllabus = lazy(() => import('./sections/Syllabus/Syllabus'))
 const WhyUs = lazy(() => import('./sections/WhyUs/WhyUs'))
@@ -19,7 +20,7 @@ export default function App() {
     <div className="min-h-screen bg-slate-950 text-slate-100 font-sans selection:bg-indigo-500 selection:text-white overflow-x-hidden">
       <Navbar scrollToForm={scrollToForm} />
       <Home scrollToForm={scrollToForm} />
-      <Suspense fallback={null}>
+      <Suspense fallback={<LoadingSpinner />}>
         <Syllabus />
         <WhyUs />
         <Process />

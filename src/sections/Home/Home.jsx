@@ -1,5 +1,4 @@
 import React from 'react'
-import { motion } from 'framer-motion'
 
 export default function Home({ scrollToForm }) {
     return (
@@ -7,12 +6,7 @@ export default function Home({ scrollToForm }) {
             <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-72 h-72 bg-indigo-600/20 rounded-full blur-[120px] pointer-events-none" />
             <div className="absolute top-1/3 left-1/3 w-60 h-60 bg-cyan-500/10 rounded-full blur-[100px] pointer-events-none" />
 
-            <motion.div
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
-                className="space-y-6 max-w-3xl"
-            >
+            <div className="animate-fade-in-up space-y-6 max-w-3xl">
                 <span className="px-3 py-1 text-xs font-semibold tracking-widest text-cyan-400 uppercase bg-cyan-500/10 border border-cyan-500/20 rounded-full">
                     Դասընթաց 0-ից մինչև Job-Ready
                 </span>
@@ -27,15 +21,15 @@ export default function Home({ scrollToForm }) {
                     Սովորիր արդիական տեխնոլոգիաները, ստեղծիր ռեալ նախագծեր, տիրապետիր AI գործիքներին և մուտք գործիր տեղեկատվական տեխնոլոգիաների աշխարհ։
                 </p>
 
-                <motion.div className="pt-4" whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.98 }}>
+                <div className="pt-4 transition-transform duration-200 hover:scale-105 active:scale-95">
                     <button
                         onClick={scrollToForm}
                         className="px-8 py-4 bg-gradient-to-r from-cyan-500 to-indigo-600 rounded-xl font-semibold text-white shadow-lg shadow-indigo-500/25 hover:shadow-cyan-500/30 transition-all duration-300 cursor-pointer"
                     >
                         Սկսել Ուսումը
                     </button>
-                </motion.div>
-            </motion.div>
+                </div>
+            </div>
         </section>
     )
 }

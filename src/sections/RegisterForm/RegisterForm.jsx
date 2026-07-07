@@ -1,5 +1,4 @@
-import React, { useState, useRef } from 'react'
-import { motion } from 'framer-motion'
+import React, { useState, useRef, useEffect } from 'react'
 import emailjs from '@emailjs/browser'
 import { Loader2, Send } from 'lucide-react'
 import RegisterFormInput from './components/RegisterFormInput/RegisterFormInput'
@@ -10,6 +9,20 @@ export default function RegisterForm() {
     const [loading, setLoading] = useState(false)
     const [status, setStatus] = useState({ type: '', msg: '' })
     const formRef = useRef()
+    const containerRef = useRef(null)
+
+    useEffect(() => {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('is-visible')
+                }
+            })
+        }, { threshold: 0.2 })
+
+        if (containerRef.current) observer.observe(containerRef.current)
+        return () => observer.disconnect()
+    }, [])
 
     const handleChange = (e) => {
         const { name, value } = e.target
@@ -73,14 +86,16 @@ export default function RegisterForm() {
     return (
         <section id="register" className="max-w-7xl mx-auto px-6 py-20 border-t border-slate-900 relative">
             <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-purple-600/10 rounded-full blur-[130px] pointer-events-none" />
-
-            <div className="max-w-xl mx-auto">
+            <div
+                ref={containerRef}
+                className="max-w-xl mx-auto animate-register-pop">
                 <div className="text-center mb-10 space-y-2">
                     <h2 className="text-3xl font-bold">Ամրագրել Տեղը</h2>
                     <p className="text-slate-400 text-sm">Լրացրեք հայտը, և մենք կկապնվենք Ձեզ հետ մանրամասների համար։</p>
                 </div>
 
-                <motion.div initial={{ opacity: 0, scale: 0.95 }} whileInView={{ opacity: 1, scale: 1 }} viewport={{ once: true }} className="p-8 rounded-3xl bg-slate-900/50 border border-slate-800/60 backdrop-blur-md shadow-2xl">
+                <div
+                    className="p-8 rounded-3xl bg-slate-900/50 border border-slate-800/60 backdrop-blur-md shadow-2xl ">
                     <form ref={formRef} onSubmit={sendEmail} className="space-y-5">
                         <RegisterFormInput label="Անուն Ազգանուն" type="text" name="name" value={formState.name} onChange={handleChange} placeholder="Պողոս Պողոսյան" required />
 
@@ -97,7 +112,7 @@ export default function RegisterForm() {
 
                         <RegisterStatus status={status} />
                     </form>
-                </motion.div>
+                </div>
             </div>
         </section>
     )

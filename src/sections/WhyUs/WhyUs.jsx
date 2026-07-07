@@ -1,33 +1,33 @@
-import React from 'react'
-import { motion } from 'framer-motion'
+import React, { useEffect, useRef } from 'react'
 import { whyUsData } from '@/datas/datas'
-import { containerVariants } from './components/WhyUsAnimations/WhyUsAnimations'
 import WhyUsCard from './components/WhyUsCard/WhyUsCard'
 
 export default function WhyUs() {
-    return (
-        <section id='whyUs' className="py-24 bg-slate-950 text-white px-6">
-            <div className="max-w-6xl mx-auto">
-                <motion.h2
-                    initial={{ opacity: 0, y: -20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    className="text-3xl md:text-4xl font-bold text-center mb-16"
-                >
-                    Ինչու՞ ընտրել <span className="bg-gradient-to-r from-cyan-400 to-indigo-500 bg-clip-text text-transparent">Development Art</span>-ը
-                </motion.h2>
+    const sectionRef = useRef(null)
 
-                <motion.div
-                    variants={containerVariants}
-                    initial="hidden"
-                    whileInView="show"
-                    viewport={{ once: true }}
-                    className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 cursor-pointer"
-                >
+    useEffect(() => {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('is-visible')
+            })
+        }, { threshold: 0.5 })
+
+        if (sectionRef.current) observer.observe(sectionRef.current)
+        return () => observer.disconnect()
+    }, [])
+
+    return (
+        <section id='whyUs' ref={sectionRef} className="py-24 bg-slate-950 text-white px-6">
+            <div className="max-w-6xl mx-auto">
+                <h2 className="text-3xl md:text-4xl font-bold text-center mb-16 animate-fade-in-up" >
+                    Ինչու՞ ընտրել <span className="bg-gradient-to-r from-cyan-400 to-indigo-500 bg-clip-text text-transparent">Development Art</span>-ը
+                </h2>
+
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 cursor-pointer" >
                     {whyUsData.map((item, index) => (
-                        <WhyUsCard key={index} item={item} />
+                        <WhyUsCard key={index} item={item} index={index} />
                     ))}
-                </motion.div>
+                </div>
             </div>
         </section>
     )

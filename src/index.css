@@ -1,5 +1,149 @@
 @import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-html {
-    scroll-behavior: smooth;
+@layer utilities {
+    .animate-fade-in-up {
+        animation: fade-in-up 0.6s ease-out forwards;
+    }
+
+    .syllabus-hidden {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    .is-visible .syllabus-hidden {
+        animation: fade-in-up 0.6s ease-out forwards;
+    }
+
+    .animate-slide-left {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+
+    .is-visible .animate-slide-left {
+        animation: slide-left 2s ease-out forwards;
+    }
+
+    .animate-slide-right {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+
+    .is-visible .animate-slide-right {
+        animation: slide-right 2s ease-out forwards;
+    }
+
+    .animate-process-left {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+
+    .animate-process-right {
+        opacity: 0;
+        transform: translateX(50px);
+    }
+
+    .is-visible.animate-process-left {
+        animation: process-slide 0.8s ease-out forwards;
+    }
+
+    .is-visible.animate-process-right {
+        animation: process-slide 0.8s ease-out forwards;
+    }
+
+    .animate-faq-scale {
+        opacity: 0;
+        transform: scale(0.9);
+        transition: all 0.5s ease-out;
+    }
+
+    .is-visible.animate-faq-scale {
+        animation: faq-pop 0.6s ease-out forwards;
+    }
+
+    .animate-register-pop {
+        opacity: 0;
+        transform: scale(0.9);
+        transition: all 0.6s ease-out;
+    }
+
+    .is-visible.animate-register-pop {
+        animation: register-pop 0.7s ease-out forwards;
+    }
+}
+
+@keyframes register-pop {
+    0% {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    70% {
+        opacity: 1;
+        transform: scale(1.03);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes faq-pop {
+    0% {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+
+    70% {
+        opacity: 1;
+        transform: scale(1.05);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes process-slide {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slide-left {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slide-right {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes fade-in-up {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-slide-left,
+.animate-slide-right,
+.animate-process-left,
+.animate-process-right {
+    will-change: transform, opacity;
 }
