@@ -1,6 +1,7 @@
 import React from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { answerVariants, iconVariants } from '../FAQAnimations/FAQAnimations'
+import { ChevronDown } from 'lucide-react'
 
 export default function FAQItem({ faq, isOpen, onToggle }) {
     return (
@@ -15,6 +16,7 @@ export default function FAQItem({ faq, isOpen, onToggle }) {
                     animate={isOpen ? "open" : "closed"}
                     className="text-sm text-slate-500 shrink-0"
                 >
+                    <ChevronDown size={20} />
                 </motion.span>
             </button>
 
