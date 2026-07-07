@@ -8,9 +8,10 @@ export default function ProcessRow({ step, index }) {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('is-visible');
+                    observer.unobserve(entry.target);
                 }
             });
-        }, { threshold: 1 });
+        }, { threshold: 0.1, rootMargin: "0px 0px -50px 0px" });
         if (rowRef.current) observer.observe(rowRef.current);
         return () => observer.disconnect();
     }, []);
